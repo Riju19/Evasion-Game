@@ -156,12 +156,7 @@ public class GameHost {
             } else if (hunterData.get(2) == 2) {
               hunterWallAction = Game.WallCreationType.VERTICAL;
             }
-//            else if (hunterData.get(2) == 3){
-//                hunterWallAction = Game.WallCreationType.DIAGONAL;
-//            }
-//            else if (hunterData.get(2) == 4){
-//                hunterWallAction = Game.WallCreationType.COUNTERDIAGONAL;
-//            }
+
             hunterWallsToDelete = hunterData.subList(3, hunterData.size());
           }
         } else {
