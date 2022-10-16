@@ -1,9 +1,7 @@
-
-import socket
 import random
+import socket
 import sys
 import time
-import random
 
 host = "localhost"
 port = int(sys.argv[1])
@@ -14,8 +12,10 @@ sock.connect((host, port))
 hunter = False
 stream = ""
 while True:
+    line = ""
     while True:
-        stream = stream + sock.recv(4096)
+        recv = sock.recv(4096)
+        stream = stream + recv.decode()
         lines = stream.split("\n")
         if len(lines) > 1:
             line = lines[-2]
@@ -24,12 +24,12 @@ while True:
         else:
             continue
 
-    print "received: " + line
+    print("received: " + line)
 
     val = .01
     time.sleep(val)
 
-    tosend = None
+    to_send = None
 
     if line == "done":
         break
@@ -38,7 +38,7 @@ while True:
     elif line == "prey":
         hunter = False
     elif line == "sendname":
-        tosend = "random_player_" + str(port)
+        to_send = "random_player_" + str(port)
     else:
         data = line.split(" ")
         if hunter:
@@ -54,12 +54,12 @@ while True:
                 wall = "4"
             if random.randint(0,80) == 0:
                 wall = "0 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20"
-            tosend = data[1] + " " + data[2] + " " + wall
+            to_send = data[1] + " " + data[2] + " " + wall
         else:
             x = random.randint(-1,1)
             y = random.randint(-1,1)
-            tosend = data[1] + " " + data[2] + " " + str(x) + " " + str(y)
+            to_send = data[1] + " " + data[2] + " " + str(x) + " " + str(y)
 
-    if tosend is not None:
-        print "sending: " + tosend
-        sock.sendall(tosend + "\n")
+    if to_send is not None:
+        print("sending: " + to_send)
+        sock.sendall((to_send + "\n").encode())
