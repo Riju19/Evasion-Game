@@ -13,16 +13,16 @@ This is the implementation of the architecture for the [evasion game](http://cs.
 (on energon2)
 
 ```
-git clone git@github.com:etytan/evasion.git
-cd evasion
+git clone git@github.com:Riju19/Evasion-Game.git
+cd Evasion-Game
 module load java-1.8
 mvn clean package
 ```
 
 (locally)
 ```
-git clone git@github.com:etytan/evasion.git
-cd evasion
+git clone git@github.com:Riju19/Evasion-Game.git
+cd Evasion-Game
 mvn clean package
 ```
 
