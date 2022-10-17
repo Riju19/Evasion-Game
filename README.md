@@ -76,6 +76,9 @@ The order of the `{wall info}` sets is relevent; when the hunter references a wa
 
 Note that both players get the same game state information each tick, EXCEPT for playerTimeLeft which is specific to the given player (and given in milliseconds). (Players are not permitted to know how close their opponents are to exhausting their time limits.)
 
+# Board
+
+The grid is of size 300 x 300, where point (0,0) lies on the top left corner. The direction x moves positively from left to right, and y moves positively from top to bottom. The hunter starts at position (0,0) and the prey begins at (230,200).
 # Hunter
 
 In response to each received game state message, the hunter should send the following:
@@ -166,8 +169,9 @@ In response to each received game state message, the prey should send the follow
 
 `[gameNum]` and `[tickNum]` should be relayed directly back to the server based on which game state message this action is in response to. 
 
-The x and y movement specifies the direction in which the prey wishes to travel. This should be 1, 0, or -1 for each -- values outside this range will be clamped. On ticks in which the prey can't move (`tickNum % 2 == 0`), these fields will have no effect, but placeholder values should still be sent.
+The x and y movement specifies the direction in which the prey wishes to travel. This should be 1, 0, or -1 for each -- if values lie outside this range, only their sign will be considered as the direction. For instance, (300,-300) will be considered as (1,-1) . On ticks in which the prey can't move (`tickNum % 2 == 0`), these fields will have no effect, but placeholder values should still be sent.
 
+Prey movement here only determines its direction, since it can move only 1 unit in any direction. 
 # Capture
 
 As noted in the class site game overview, the game is over when the Euclidean distance between hunter and prey is within four, and there is no wall between them.
